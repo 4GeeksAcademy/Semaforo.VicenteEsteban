@@ -1,0 +1,16 @@
+import React from "react";
+
+//include images into your bundle
+import rigoImage from "/workspaces/Semaforo.VicenteEsteban/src/img/rigo-baby.jpg";
+
+
+//create your first component
+const Home = () => {
+	return (
+	
+			<TrafficLight/>
+
+	);
+};
+
+export default Home;
