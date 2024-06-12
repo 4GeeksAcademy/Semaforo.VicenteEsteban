@@ -6,6 +6,10 @@ const TrafficLight = () =>{
 
     const [encendido, setEncendido] = useState ("red")
     const [active, setActive] = useState(false)
+    const [purpleActive, setPurpleActive] = useState(false)
+    const handleShowPurple = () => {
+        setPurpleActive(!purpleActive);
+    };
 
     const changeColor = (color) => {
         setEncendido (color)
@@ -20,8 +24,11 @@ const TrafficLight = () =>{
                 }else if(encendido == "yellow"){
                     setEncendido("green")
                 }else if (encendido =="green"){
-                    setEncendido("red")
+                    setEncendido(purpleActive ? "purple" : "red")
+                }else if (encendido == "purple"){
+                    setEncendido("red");
                 }
+                    
             }, 1000)
             return ()=>clearInterval(interval)
         }
@@ -29,7 +36,14 @@ const TrafficLight = () =>{
 
     return (
         <main>
-            <div className="p-box "></div>
+            <div className="p-box ">
+                <div className="boton-container">
+                    <button onClick={()=>setActive(!active)} className="boton mt-4">Activar</button>
+                    <button onClick={handleShowPurple}
+                    className="purpleBoton mt-4">Añade boton morado</button>
+                </div>
+            </div>
+           
             <div className="box-light ">
                 <div className={`red  ${encendido == "red" ? "light-on" : ""} `}
                     onClick={()=>changeColor("red")}>
@@ -43,12 +57,24 @@ const TrafficLight = () =>{
                     onClick={()=>changeColor("green")}>
                     
                 </div>
-              
-                
-                
+
+                {purpleActive && <div className={`purple ${encendido=="purple" ? "light-on" : ""}`}
+                onClick={()=>changeColor("purple")}>
+                </div>
+                } 
+               
+               
             </div>
-            <button onClick={()=>setActive(!active)} className="boton mt-4 btn btn-success">Activar</button>
             
         </main>
+        
     )}
+    <div
+    
+    ></div>
+
 export default TrafficLight;
+
+
+
+
